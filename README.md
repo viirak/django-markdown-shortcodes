@@ -23,16 +23,16 @@ Shortcode functions names expected to start with `shortcode_` followed by the st
 
 The following example creates support for a `[[youtube]]` shortcode.
 
-Define the processing function, using the `shortcode` decorator to register the function for processing:
+Define the processing function, using the `shortcode` decorator to register the function for processing in your template tag:
 
     from markdown_shortcodes import shortcode
 
     @shortcode
-    def shortcode_youtube(*args):
+    def shortcode_youtube(**kwargs):
         return render_to_string("shortcodes/youtube.html", {
-            'id': args[0],
-            'title': args[1] if len(args) > 1 else '',
-            'alternate_uri': args[2] if len(args) > 2 else '',
+            'id': kwargs.get("id"),
+            'title': kwargs.get("title"),
+            'alternate_uri': kwargs.get("alternate_url"),
         })
 
 Create a template file:
@@ -59,7 +59,7 @@ Your content:
 
     So did you know about Whoa McTuggins? I saw an interview with him about preparing tomatos. It changed my life:
     
-    [[youtube XTJIGGBN8l4 "A thrilling exploration of tomato dicing"]]
+    [[youtube id="XTJIGGBN8l4" title="A thrilling exploration of tomato dicing"]]
     
     Now I prepare pico de gallo almost weekly!
 
