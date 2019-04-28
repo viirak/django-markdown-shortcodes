@@ -50,11 +50,11 @@ def expand_shortcodes(document):
         # Otherwise, ignore the shortcode string and move on.
         shortcode_method = shortcodes.get(method_name, None)
         if shortcode_method:
-            print "  Rendering shortcode `%s` with parameters %r" % (shortcode_name, parameters)
+            print("  Rendering shortcode `%s` with parameters %r" % (shortcode_name, parameters))
             html_string = shortcode_method(*parameters)
             document = document.replace(sequence, html_string)
         else:
-            print "  shortcode `%s` not found" % shortcode_name
+            print("  shortcode `%s` not found" % shortcode_name)
     
     return document
 
